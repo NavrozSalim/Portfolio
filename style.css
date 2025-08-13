@@ -1,0 +1,300 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e9ecef;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #253e58;
+    color: #fff2f2;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 1.2em;
+}
+
+/* Container Styles */
+.container {
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* About Section */
+.about {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.about:hover {
+    transform: translateY(-10px);
+}
+
+.about img {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid #007bff;
+}
+
+.about h2 {
+    margin-top: 0;
+    font-size: 2em;
+    color: #007bff;
+}
+
+.about p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Experience, Education, Skills Sections */
+.experience, .education, .skills {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.experience:hover, .education:hover, .skills:hover {
+    transform: translateY(-10px);
+}
+
+.experience h2, .education h2, .skills h2 {
+    margin-top: 0;
+    font-size: 1.8em;
+    color: #007bff;
+}
+
+.experience ul, .education ul, .skills ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+}
+
+.experience li, .education li, .skills li {
+    margin-bottom: 15px;
+    padding-left: 25px; /* Ensure space for custom bullet */
+    position: relative;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.experience li:before, .education li:before, .skills li:before {
+    content: '•';
+    position: absolute;
+    left: 0; /* Align to the start of the padding */
+    top: 0;
+    color: #007bff;
+    font-size: 1.5em;
+    line-height: 1; /* Adjust line height to center the dot vertically */
+    margin-top: 3px; /* Fine-tune the vertical position of the bullet */
+}
+
+/* Contact Section */
+.contact {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact h2 {
+    margin-top: 0;
+    font-size: 1.8em;
+    color: #007bff;
+}
+
+.contact p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact form input,
+.contact form textarea {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: border 0.3s ease;
+}
+
+.contact form input:focus,
+.contact form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.contact form button {
+    padding: 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact form button:hover {
+    background-color: #218838;
+    transform: translateY(-5px);
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 25px;
+    margin-top: 50px;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer p:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .about img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .about h2, .experience h2, .education h2, .skills h2 {
+        font-size: 1.5em;
+    }
+
+    .experience li, .education li, .skills li {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    header p {
+        font-size: 0.9em;
+    }
+
+    .about img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .about h2, .experience h2, .education h2, .skills h2 {
+        font-size: 1.3em;
+    }
+
+    .experience li, .education li, .skills li {
+        font-size: 0.9em;
+    }
+
+    .contact form input,
+    .contact form textarea {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .contact form button {
+        padding: 10px;
+        font-size: 1.1em;
+    }
+
+    footer {
+        font-size: 0.9em;
+    }
+}
+/* Keep all your previous CSS, just add this for Projects */
+.projects {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.projects:hover {
+    transform: translateY(-10px);
+}
+
+.projects h2 {
+    margin-top: 0;
+    font-size: 1.8em;
+    color: #007bff;
+}
+
+.projects ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.projects li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.projects li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #007bff;
+    font-size: 1.5em;
+    line-height: 1;
+    margin-top: 3px;
+}
