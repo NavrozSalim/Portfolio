@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Tracker — Nauroz Salim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1c2e;
+      --panel: #162636;
+      --card: #1c3144;
+      --line: #2a455c;
+      --text: #e8eef4;
+      --muted: #92a4b8;
+      --accent: #2a9d8f;
+      --warn: #e9c46a;
+      --danger: #e76f51;
+      --ok: #52b788;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Outfit, sans-serif;
+      background: radial-gradient(ellipse at top, #1a3348, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; font-size: 1.25rem; }
+    header p { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.9rem; }
+    a.back { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+    }
+    .stat strong { display: block; font-size: 1.4rem; }
+    .stat span { color: var(--muted); font-size: 0.82rem; }
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1rem;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .panel h2 { margin: 0 0 0.85rem; font-size: 1rem; }
+    label { display: block; font-size: 0.8rem; color: var(--muted); margin: 0.55rem 0 0.25rem; }
+    input, select, textarea, button {
+      width: 100%;
+      font: inherit;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 0.55rem 0.7rem;
+    }
+    textarea { min-height: 70px; resize: vertical; }
+    button {
+      margin-top: 0.9rem;
+      background: var(--accent);
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.08); }
+    .list { display: grid; gap: 0.75rem; }
+    .job {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .job h3 { margin: 0; font-size: 1rem; }
+    .company { color: var(--muted); font-size: 0.88rem; }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .Applied { background: #24405a; color: #9ec5e8; }
+    .Interview { background: #3d3a1f; color: var(--warn); }
+    .Offer { background: #1f3d32; color: var(--ok); }
+    .Rejected { background: #3d2620; color: #f0a090; }
+    .meta { color: var(--muted); font-size: 0.8rem; }
+    .actions { display: flex; gap: 0.4rem; margin-top: 0.35rem; }
+    .actions button {
+      width: auto;
+      margin: 0;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.78rem;
+      background: transparent;
+      border: 1px solid var(--line);
+    }
+    .actions .danger { border-color: var(--danger); color: #f0a090; }
+    @media (max-width: 860px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Job Application Tracker</h1>
+      <p>Pipeline CRM for internships &amp; junior roles · Local persistence</p>
+    </div>
+    <a class="back" href="../cv.html">← Back to CV</a>
+  </header>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><strong id="c-all">0</strong><span>Total apps</span></div>
+      <div class="stat"><strong id="c-interview">0</strong><span>Interviews</span></div>
+      <div class="stat"><strong id="c-offer">0</strong><span>Offers</span></div>
+      <div class="stat"><strong id="c-rate">0%</strong><span>Response rate</span></div>
+    </div>
+    <div class="layout">
+      <form class="panel" id="form">
+        <h2>Add application</h2>
+        <label for="role">Role</label>
+        <input id="role" required placeholder="Frontend Intern">
+        <label for="company">Company</label>
+        <input id="company" required placeholder="Acme Tech">
+        <label for="status">Status</label>
+        <select id="status">
+          <option>Applied</option>
+          <option>Interview</option>
+          <option>Offer</option>
+          <option>Rejected</option>
+        </select>
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Referral, stack, follow-up date…"></textarea>
+        <button type="submit">Save application</button>
+      </form>
+      <section class="panel">
+        <h2>Pipeline</h2>
+        <div class="list" id="list"></div>
+      </section>
+    </div>
+  </div>
+  <script>
+    const KEY = "nauroz-job-tracker-v1";
+    const form = document.getElementById("form");
+    const list = document.getElementById("list");
+
+    const load = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+    const save = (rows) => localStorage.setItem(KEY, JSON.stringify(rows));
+
+    function seedIfEmpty() {
+      let rows = load();
+      if (rows.length) return rows;
+      rows = [
+        { id: 1, role: "Web Developer Intern", company: "Systems Ltd", status: "Interview", notes: "React + Node stack", date: "2026-07-12" },
+        { id: 2, role: "Junior Frontend Engineer", company: "Fintech PK", status: "Applied", notes: "Applied via LinkedIn", date: "2026-07-20" },
+        { id: 3, role: "Software Engineering Intern", company: "CloudWorks", status: "Offer", notes: "Remote hybrid", date: "2026-06-28" }
+      ];
+      save(rows);
+      return rows;
+    }
+
+    function stats(rows) {
+      document.getElementById("c-all").textContent = rows.length;
+      document.getElementById("c-interview").textContent = rows.filter(r => r.status === "Interview").length;
+      document.getElementById("c-offer").textContent = rows.filter(r => r.status === "Offer").length;
+      const responded = rows.filter(r => r.status !== "Applied").length;
+      document.getElementById("c-rate").textContent = rows.length ? Math.round((responded / rows.length) * 100) + "%" : "0%";
+    }
+
+    function render() {
+      const rows = seedIfEmpty().sort((a, b) => b.id - a.id);
+      stats(rows);
+      list.innerHTML = rows.map(r => `
+        <article class="job">
+          <div class="job-top">
+            <div>
+              <h3>${escapeHtml(r.role)}</h3>
+              <div class="company">${escapeHtml(r.company)}</div>
+            </div>
+            <span class="badge ${r.status}">${r.status}</span>
+          </div>
+          <div class="meta">${escapeHtml(r.date || "")}${r.notes ? " · " + escapeHtml(r.notes) : ""}</div>
+          <div class="actions">
+            <button type="button" data-next="${r.id}">Advance status</button>
+            <button type="button" class="danger" data-del="${r.id}">Delete</button>
+          </div>
+        </article>
+      `).join("") || "<p class='meta'>No applications yet.</p>";
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+    }
+
+    const order = ["Applied", "Interview", "Offer", "Rejected"];
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const rows = load();
+      rows.push({
+        id: Date.now(),
+        role: role.value.trim(),
+        company: company.value.trim(),
+        status: status.value,
+        notes: notes.value.trim(),
+        date: new Date().toISOString().slice(0, 10)
+      });
+      save(rows);
+      form.reset();
+      render();
+    });
+
+    list.addEventListener("click", (e) => {
+      const next = e.target.getAttribute("data-next");
+      const del = e.target.getAttribute("data-del");
+      let rows = load();
+      if (next) {
+        rows = rows.map(r => {
+          if (String(r.id) !== next) return r;
+          const i = order.indexOf(r.status);
+          return { ...r, status: order[(i + 1) % order.length] };
+        });
+        save(rows);
+        render();
+      }
+      if (del) {
+        save(rows.filter(r => String(r.id) !== del));
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

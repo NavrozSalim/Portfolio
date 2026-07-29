@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Analytics Dashboard — Nauroz Salim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #f3f6f8;
+      --ink: #132033;
+      --muted: #5b6b7c;
+      --card: #fff;
+      --line: #d8e0e8;
+      --accent: #0f766e;
+      --band: #1e3a5f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Outfit, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    header {
+      background: linear-gradient(120deg, var(--band), #245b57);
+      color: #fff;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    header h1 { margin: 0; font-size: 1.25rem; }
+    header p { margin: 0.25rem 0 0; opacity: .85; font-size: .9rem; }
+    a.back { color: #fff; font-weight: 700; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1.2rem; }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .kpi, .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 8px 24px rgba(19,32,51,.05);
+    }
+    .kpi span { color: var(--muted); font-size: .82rem; }
+    .kpi strong { display: block; margin-top: .25rem; font-size: 1.45rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 1rem;
+    }
+    .panel h2 { margin: 0 0 .8rem; font-size: 1rem; }
+    canvas { width: 100% !important; max-height: 280px; }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th, td { text-align: left; padding: .55rem .2rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+    .status { font-weight: 700; color: var(--accent); }
+    .toolbar { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .toolbar button {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: .45rem .85rem;
+      font: inherit;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .toolbar button.active { background: var(--band); color: #fff; border-color: var(--band); }
+    @media (max-width: 860px) {
+      .kpis, .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .kpis, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>E-Commerce Analytics Dashboard</h1>
+      <p>KPI overview · revenue trends · top products (Fake Store API)</p>
+    </div>
+    <a class="back" href="../cv.html">← Back to CV</a>
+  </header>
+  <div class="wrap">
+    <div class="toolbar">
+      <button type="button" class="active" data-range="7">7 days</button>
+      <button type="button" data-range="30">30 days</button>
+      <button type="button" data-range="90">90 days</button>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span>Revenue</span><strong id="kpi-rev">—</strong></div>
+      <div class="kpi"><span>Orders</span><strong id="kpi-orders">—</strong></div>
+      <div class="kpi"><span>Avg. order</span><strong id="kpi-aov">—</strong></div>
+      <div class="kpi"><span>Products tracked</span><strong id="kpi-products">—</strong></div>
+    </div>
+    <div class="grid">
+      <section class="panel">
+        <h2>Revenue trend</h2>
+        <canvas id="revenueChart" height="220"></canvas>
+      </section>
+      <section class="panel">
+        <h2>Category mix</h2>
+        <canvas id="categoryChart" height="220"></canvas>
+      </section>
+      <section class="panel" style="grid-column: 1 / -1">
+        <h2>Top products</h2>
+        <table>
+          <thead>
+            <tr><th>Product</th><th>Category</th><th>Price</th><th>Demand score</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+  <script>
+    let products = [];
+    let revenueChart, categoryChart;
+
+    const money = (n) => "$" + n.toLocaleString(undefined, { maximumFractionDigits: 0 });
+
+    function seededRevenue(days, products) {
+      const labels = [];
+      const data = [];
+      const base = products.reduce((s, p) => s + p.price, 0) / Math.max(products.length, 1);
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        labels.push(d.toLocaleDateString(undefined, { month: "short", day: "numeric" }));
+        const wave = 0.75 + Math.sin(i / 3) * 0.2 + ((i * 17) % 7) / 30;
+        data.push(Math.round(base * 18 * wave));
+      }
+      return { labels, data };
+    }
+
+    function render(days) {
+      const rev = seededRevenue(days, products);
+      const totalRev = rev.data.reduce((a, b) => a + b, 0);
+      const orders = Math.round(totalRev / 85);
+      document.getElementById("kpi-rev").textContent = money(totalRev);
+      document.getElementById("kpi-orders").textContent = orders;
+      document.getElementById("kpi-aov").textContent = money(totalRev / Math.max(orders, 1));
+      document.getElementById("kpi-products").textContent = products.length;
+
+      const cats = {};
+      products.forEach(p => { cats[p.category] = (cats[p.category] || 0) + 1; });
+
+      if (revenueChart) revenueChart.destroy();
+      if (categoryChart) categoryChart.destroy();
+
+      revenueChart = new Chart(document.getElementById("revenueChart"), {
+        type: "line",
+        data: {
+          labels: rev.labels,
+          datasets: [{
+            label: "Revenue",
+            data: rev.data,
+            borderColor: "#0f766e",
+            backgroundColor: "rgba(15,118,110,.15)",
+            fill: true,
+            tension: 0.35
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { ticks: { callback: (v) => "$" + v } } }
+        }
+      });
+
+      categoryChart = new Chart(document.getElementById("categoryChart"), {
+        type: "doughnut",
+        data: {
+          labels: Object.keys(cats),
+          datasets: [{
+            data: Object.values(cats),
+            backgroundColor: ["#1e3a5f", "#0f766e", "#c2410c", "#a16207"]
+          }]
+        },
+        options: { plugins: { legend: { position: "bottom" } } }
+      });
+
+      const top = [...products]
+        .sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0))
+        .slice(0, 6);
+      document.getElementById("rows").innerHTML = top.map(p => `
+        <tr>
+          <td>${p.title.slice(0, 48)}${p.title.length > 48 ? "…" : ""}</td>
+          <td>${p.category}</td>
+          <td>$${p.price}</td>
+          <td class="status">${(p.rating?.rate || 0).toFixed(1)} / 5</td>
+        </tr>
+      `).join("");
+    }
+
+    document.querySelectorAll(".toolbar button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".toolbar button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        render(Number(btn.dataset.range));
+      });
+    });
+
+    fetch("https://fakestoreapi.com/products")
+      .then(r => r.json())
+      .then(data => {
+        products = data;
+        render(7);
+      })
+      .catch(() => {
+        document.getElementById("rows").innerHTML = "<tr><td colspan='4'>Could not load API data. Check your connection.</td></tr>";
+      });
+  </script>
+</body>
+</html>

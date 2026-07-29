@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Resume Feedback Tool — Nauroz Salim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1c2e;
+      --muted: #4a5c70;
+      --panel: #ffffff;
+      --bg: #e8eef2;
+      --accent: #1a6b5c;
+      --band: #16324f;
+      --line: #d5dde6;
+      --good: #1b7f5a;
+      --mid: #9a6b12;
+      --bad: #a33b2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Outfit, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(26,107,92,.15), transparent),
+        var(--bg);
+      min-height: 100vh;
+    }
+    header {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.25rem 1.25rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+    h1 { margin: 0; font-family: "Source Serif 4", Georgia, serif; font-size: 1.7rem; }
+    .sub { margin: 0.35rem 0 0; color: var(--muted); }
+    a.back { color: var(--band); font-weight: 700; text-decoration: none; }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.1rem;
+      box-shadow: 0 10px 30px rgba(15,28,46,.06);
+    }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    textarea, select, button, input {
+      width: 100%;
+      margin-top: 0.4rem;
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      padding: 0.7rem 0.8rem;
+    }
+    textarea { min-height: 260px; resize: vertical; }
+    button {
+      margin-top: 0.85rem;
+      background: var(--band);
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { background: var(--accent); }
+    .score-wrap { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .score {
+      width: 84px; height: 84px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 1.5rem; font-weight: 700;
+      border: 4px solid var(--accent);
+      color: var(--accent);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 1rem; }
+    .chip {
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.3rem 0.6rem; border-radius: 999px;
+      background: #eef5f3; color: var(--accent);
+    }
+    .item { margin: 0 0 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--line); }
+    .item:last-child { border-bottom: none; margin: 0; padding: 0; }
+    .item h3 { margin: 0 0 0.25rem; font-size: 0.95rem; }
+    .item p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.45; }
+    .tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .good { color: var(--good); }
+    .mid { color: var(--mid); }
+    .bad { color: var(--bad); }
+    .empty { color: var(--muted); }
+    @media (max-width: 800px) { .wrap { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>AI Resume Feedback Tool</h1>
+      <p class="sub">Rule-based + keyword intelligence for ATS-style resume coaching</p>
+    </div>
+    <a class="back" href="../cv.html">← Back to CV</a>
+  </header>
+  <div class="wrap">
+    <section class="card">
+      <label for="role">Target role</label>
+      <select id="role">
+        <option>Web Developer Intern</option>
+        <option>Frontend Developer</option>
+        <option>Full-Stack Developer</option>
+        <option>Software Engineering Intern</option>
+      </select>
+      <label for="resume" style="display:block;margin-top:.8rem">Paste resume text</label>
+      <textarea id="resume" placeholder="Paste your resume or LinkedIn About + experience here…"></textarea>
+      <button type="button" id="analyze">Analyze resume</button>
+    </section>
+    <section class="card" id="out">
+      <p class="empty">Results appear here — score, missing keywords, and actionable fixes.</p>
+    </section>
+  </div>
+  <script>
+    const keywordsByRole = {
+      "Web Developer Intern": ["html", "css", "javascript", "react", "api", "git", "responsive", "portfolio", "internship"],
+      "Frontend Developer": ["react", "javascript", "typescript", "css", "accessibility", "responsive", "component", "state", "ui"],
+      "Full-Stack Developer": ["react", "node", "api", "database", "authentication", "rest", "javascript", "deploy", "testing"],
+      "Software Engineering Intern": ["python", "algorithms", "git", "oop", "data structures", "api", "problem solving", "team"]
+    };
+
+    function analyze(text, role) {
+      const lower = text.toLowerCase();
+      const words = lower.split(/\W+/).filter(Boolean);
+      const keys = keywordsByRole[role];
+      const found = keys.filter(k => lower.includes(k));
+      const missing = keys.filter(k => !lower.includes(k));
+      let score = Math.round((found.length / keys.length) * 70);
+      if (text.length > 400) score += 8;
+      if (text.length > 900) score += 7;
+      if (/\d{4}/.test(text)) score += 5;
+      if (/project|built|developed|implemented/i.test(text)) score += 5;
+      if (/http|github|linkedin|portfolio/i.test(text)) score += 5;
+      score = Math.min(98, score);
+
+      const tips = [];
+      if (missing.length) {
+        tips.push({
+          level: "bad",
+          title: "Add role keywords for ATS",
+          body: "Missing high-signal terms: " + missing.slice(0, 5).join(", ") + "."
+        });
+      }
+      if (!/measurable|%|\d+\+?/i.test(text)) {
+        tips.push({
+          level: "mid",
+          title: "Quantify impact",
+          body: "Add numbers (users, load time, features shipped) so recruiters see outcomes, not only tasks."
+        });
+      }
+      if (!/react|node|python|api/i.test(text)) {
+        tips.push({
+          level: "mid",
+          title: "Highlight modern stack",
+          body: "Today’s junior roles expect React/Node or strong JavaScript + API work called out near the top."
+        });
+      }
+      if (text.length < 350) {
+        tips.push({
+          level: "bad",
+          title: "Expand project depth",
+          body: "Each project should mention problem, tech, and result in 2–3 lines."
+        });
+      }
+      tips.push({
+        level: "good",
+        title: "Lead with a hiring headline",
+        body: "Put target title + strongest stack in the first two lines (e.g. Web Developer Intern | React, Node, APIs)."
+      });
+
+      return { score, found, missing, tips };
+    }
+
+    document.getElementById("analyze").addEventListener("click", () => {
+      const text = document.getElementById("resume").value.trim();
+      const role = document.getElementById("role").value;
+      const out = document.getElementById("out");
+      if (text.length < 40) {
+        out.innerHTML = "<p class='empty'>Paste at least a short resume section to analyze.</p>";
+        return;
+      }
+      const r = analyze(text, role);
+      out.innerHTML = `
+        <div class="score-wrap">
+          <div class="score">${r.score}</div>
+          <div>
+            <strong>Match score for ${role}</strong>
+            <p class="sub" style="margin:0.25rem 0 0">Based on keywords, structure signals, and project language.</p>
+          </div>
+        </div>
+        <div class="chips">${r.found.map(k => `<span class="chip">${k}</span>`).join("") || "<span class='empty'>No target keywords found</span>"}</div>
+        ${r.tips.map(t => `
+          <article class="item">
+            <div class="tag ${t.level}">${t.level === "good" ? "Keep" : t.level === "mid" ? "Improve" : "Fix"}</div>
+            <h3>${t.title}</h3>
+            <p>${t.body}</p>
+          </article>
+        `).join("")}
+      `;
+    });
+  </script>
+</body>
+</html>
