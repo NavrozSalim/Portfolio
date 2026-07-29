@@ -7,6 +7,8 @@
     --accent-bright: #2a9d8f;
     --band: #16324f;
     --shadow: 0 28px 60px rgba(15, 28, 46, 0.28);
+    --card-w: 86mm;
+    --card-h: 54mm;
 }
 
 * {
@@ -22,6 +24,8 @@ body {
         radial-gradient(ellipse 80% 60% at 10% 10%, rgba(42, 157, 143, 0.22), transparent 55%),
         radial-gradient(ellipse 70% 50% at 90% 80%, rgba(22, 50, 79, 0.35), transparent 50%),
         linear-gradient(160deg, #d9e4ec 0%, var(--paper) 45%, #c8d5c4 100%);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
 }
 
 .page {
@@ -40,6 +44,22 @@ body {
     color: var(--ink-soft);
     letter-spacing: 0.02em;
     animation: fadeUp 0.7s ease both;
+    text-align: center;
+}
+
+.print-only {
+    display: none;
+}
+
+.print-sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cut-frame {
+    display: inline-block;
 }
 
 .id-card {
@@ -174,6 +194,7 @@ body {
     font-size: 0.75rem;
 }
 
+.id-card__url,
 .id-card__footer a {
     color: var(--band);
     text-decoration: none;
@@ -276,28 +297,176 @@ body {
     }
 }
 
+/* ========== PRINT / CUT-READY ID FORMAT ========== */
 @media print {
-    body {
-        background: #fff;
+    @page {
+        size: A4 portrait;
+        margin: 12mm;
     }
 
-    .hint,
-    .actions {
+    html,
+    body {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background: #fff !important;
+        color: #000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .screen-only {
         display: none !important;
     }
 
+    .print-only {
+        display: block;
+    }
+
     .page {
-        padding: 0;
         min-height: auto;
+        padding: 0;
+        gap: 0;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .print-sheet {
+        width: 100%;
+        align-items: center;
+        gap: 4mm;
+        padding-top: 8mm;
+    }
+
+    .cut-note {
+        margin: 0;
+        font-size: 9pt;
+        color: #555;
+        letter-spacing: 0.04em;
+    }
+
+    .cut-frame {
+        padding: 3mm;
+        border: 1px dashed #888;
+        background: #fff;
     }
 
     .id-card {
-        box-shadow: none;
-        border: 1px solid #ccc;
+        width: var(--card-w);
+        height: var(--card-h);
+        max-width: none;
+        margin: 0;
+        border-radius: 2.5mm;
+        box-shadow: none !important;
+        border: 0.4mm solid #1a1a1a;
+        overflow: hidden;
+        animation: none;
+        display: flex;
+        flex-direction: column;
         break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .id-card__band {
+        height: 2.2mm;
+        flex-shrink: 0;
+    }
+
+    .id-card__header {
+        padding: 1.6mm 2.8mm 0.6mm;
+        gap: 2mm;
+    }
+
+    .id-card__org {
+        font-size: 5.5pt;
+        letter-spacing: 0.05em;
+    }
+
+    .id-card__badge {
+        font-size: 5pt;
+        padding: 0.6mm 1.6mm;
+        border-radius: 1mm;
+        background: rgba(26, 107, 92, 0.15);
+    }
+
+    .id-card__body {
+        flex: 1;
+        grid-template-columns: 16mm 1fr 18mm;
+        gap: 2mm 2.4mm;
+        align-items: center;
+        padding: 1mm 2.8mm 1.4mm;
+        justify-items: stretch;
+        text-align: left;
     }
 
     .id-card__photo-wrap {
+        width: 16mm;
+        height: 16mm;
+        border-radius: 1.5mm;
+        border-width: 0.5mm;
+        box-shadow: none;
         animation: none;
+    }
+
+    .id-card__name {
+        font-size: 9.5pt;
+        line-height: 1.1;
+    }
+
+    .id-card__role {
+        margin: 0.4mm 0 1mm;
+        font-size: 6.5pt;
+    }
+
+    .id-card__meta {
+        gap: 0.2mm;
+        font-size: 5.2pt;
+        line-height: 1.25;
+    }
+
+    .id-card__meta li:nth-child(2) {
+        max-width: 38mm;
+    }
+
+    .id-card__qr-block {
+        justify-self: end;
+    }
+
+    .id-card__qr {
+        padding: 0.8mm;
+        border-radius: 1mm;
+        border-color: #222;
+    }
+
+    .id-card__qr img,
+    .id-card__qr canvas {
+        width: 15mm !important;
+        height: 15mm !important;
+    }
+
+    .id-card__qr-label {
+        margin: 0.6mm 0 0;
+        font-size: 4.5pt;
+        letter-spacing: 0.08em;
+    }
+
+    .id-card__footer {
+        flex-shrink: 0;
+        flex-wrap: nowrap;
+        padding: 1.2mm 2.8mm;
+        font-size: 5pt;
+        background: #e8eef3 !important;
+        gap: 2mm;
+    }
+
+    .id-card__url,
+    .id-card__footer a {
+        color: #16324f !important;
+        text-decoration: none;
+    }
+
+    a[href]::after {
+        content: none !important;
     }
 }

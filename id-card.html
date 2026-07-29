@@ -11,48 +11,54 @@
 </head>
 <body>
     <div class="page">
-        <p class="hint">Scan the QR code to open the full CV / portfolio</p>
+        <p class="hint screen-only">Scan the QR code to open the full CV / portfolio · Use Print for a cut-ready card</p>
 
-        <article class="id-card" aria-label="Digital ID card for Nauroz Salim">
-            <div class="id-card__band"></div>
+        <div class="print-sheet">
+            <p class="cut-note print-only">Cut along the dashed line · Standard ID size 86 × 54 mm</p>
 
-            <header class="id-card__header">
-                <span class="id-card__org">SSUET · Computer Engineering</span>
-                <span class="id-card__badge">Student ID</span>
-            </header>
+            <div class="cut-frame">
+                <article class="id-card" aria-label="Digital ID card for Nauroz Salim">
+                    <div class="id-card__band"></div>
 
-            <div class="id-card__body">
-                <div class="id-card__photo-wrap">
-                    <img class="id-card__photo" src="image.jpg" alt="Portrait of Nauroz Salim">
-                </div>
+                    <header class="id-card__header">
+                        <span class="id-card__org">SSUET · Computer Engineering</span>
+                        <span class="id-card__badge">Student ID</span>
+                    </header>
 
-                <div class="id-card__info">
-                    <h1 class="id-card__name">Nauroz Salim</h1>
-                    <p class="id-card__role">Web Developer Intern</p>
-                    <ul class="id-card__meta">
-                        <li>Bachelors in Computer Engineering</li>
-                        <li>Sir Syed University of Engineering &amp; Technology</li>
-                        <li>2022 – 2026</li>
-                    </ul>
-                </div>
+                    <div class="id-card__body">
+                        <div class="id-card__photo-wrap">
+                            <img class="id-card__photo" src="image.jpg" alt="Portrait of Nauroz Salim">
+                        </div>
 
-                <div class="id-card__qr-block">
-                    <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to portfolio CV"></div>
-                    <p class="id-card__qr-label">Scan for CV</p>
-                </div>
+                        <div class="id-card__info">
+                            <h1 class="id-card__name">Nauroz Salim</h1>
+                            <p class="id-card__role">Web Developer Intern</p>
+                            <ul class="id-card__meta">
+                                <li>Bachelors in Computer Engineering</li>
+                                <li>Sir Syed University of Engineering &amp; Technology</li>
+                                <li>2022 – 2026</li>
+                            </ul>
+                        </div>
+
+                        <div class="id-card__qr-block">
+                            <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to portfolio CV"></div>
+                            <p class="id-card__qr-label">Scan for CV</p>
+                        </div>
+                    </div>
+
+                    <footer class="id-card__footer">
+                        <span class="id-card__url">navrozsalim.github.io/Portfolio</span>
+                        <span class="id-card__footer-links">
+                            <a href="https://www.linkedin.com/in/navrozsalim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            ·
+                            <a href="https://github.com/NavrozSalim" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        </span>
+                    </footer>
+                </article>
             </div>
+        </div>
 
-            <footer class="id-card__footer">
-                <a href="https://navrozsalim.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">navrozsalim.github.io/Portfolio</a>
-                <span class="id-card__footer-links">
-                    <a href="https://www.linkedin.com/in/navrozsalim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    ·
-                    <a href="https://github.com/NavrozSalim" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </span>
-            </footer>
-        </article>
-
-        <div class="actions">
+        <div class="actions screen-only">
             <button type="button" class="btn" onclick="window.print()">Print ID Card</button>
             <a class="btn btn--ghost" href="index.html">Back to Portfolio</a>
         </div>
