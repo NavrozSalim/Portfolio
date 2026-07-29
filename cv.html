@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nauroz Salim — CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cv.css">
+</head>
+<body>
+    <div class="cv-toolbar screen-only">
+        <button type="button" class="btn" onclick="window.print()">Print / Save PDF</button>
+        <a class="btn btn--ghost" href="index.html">Portfolio</a>
+        <a class="btn btn--ghost" href="id-card.html">ID Card</a>
+    </div>
+
+    <main class="cv" aria-label="Curriculum Vitae of Nauroz Salim">
+        <header class="cv__header">
+            <img class="cv__photo" src="image.jpg" alt="Portrait of Nauroz Salim">
+            <div class="cv__identity">
+                <h1>Nauroz Salim</h1>
+                <p class="cv__title">Web Developer Intern · Computer Engineering Student</p>
+                <p class="cv__contacts">
+                    <a href="https://www.linkedin.com/in/navrozsalim">LinkedIn</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/NavrozSalim">GitHub</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://navrozsalim.github.io/Portfolio/">Portfolio</a>
+                </p>
+            </div>
+        </header>
+
+        <section class="cv__section">
+            <h2>Profile</h2>
+            <p>
+                Computer Engineering student and aspiring web developer specializing in responsive,
+                user-friendly web applications. Skilled in HTML, CSS, JavaScript, React, Node.js, and Python.
+                Builds projects that solve real-world problems and is eager to contribute to professional development teams.
+            </p>
+        </section>
+
+        <section class="cv__section">
+            <h2>Education</h2>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Bachelors in Computer Engineering</h3>
+                    <span>2022 – 2026</span>
+                </div>
+                <p class="cv__org">Sir Syed University of Engineering and Technology</p>
+                <p>In progress</p>
+            </article>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Intermediate</h3>
+                    <span>2022</span>
+                </div>
+                <p class="cv__org">Happy Place Group of Colleges</p>
+            </article>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Matriculation</h3>
+                    <span>2019</span>
+                </div>
+                <p class="cv__org">Metropolitan Foundation School</p>
+            </article>
+        </section>
+
+        <section class="cv__section">
+            <h2>Projects</h2>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>E-Commerce Product Catalog</h3>
+                    <span>HTML · CSS · JavaScript · API</span>
+                </div>
+                <p>Product catalog that loads data from an API, with search and category filtering for a smooth shopping experience.</p>
+                <a class="cv__link" href="https://navrozsalim.github.io/Ecommerence-Catlog/">View project</a>
+            </article>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>To-Do List Web App</h3>
+                    <span>HTML · CSS · JavaScript · LocalStorage</span>
+                </div>
+                <p>Dynamic to-do list with add, edit, and delete, and persistent data storage in the browser.</p>
+                <a class="cv__link" href="https://navrozsalim.github.io/Todo-list/">View project</a>
+            </article>
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Weather App</h3>
+                    <span>JavaScript · OpenWeather API</span>
+                </div>
+                <p>Fetches and displays real-time weather for any city with responsive design and API integration.</p>
+                <a class="cv__link" href="https://navrozsalim.github.io/Weather-Checker/">View project</a>
+            </article>
+        </section>
+
+        <section class="cv__section">
+            <h2>Skills</h2>
+            <ul class="cv__skills">
+                <li>HTML, CSS, JavaScript</li>
+                <li>React, Node.js</li>
+                <li>Python</li>
+                <li>Responsive Web Design</li>
+                <li>API Integration</li>
+                <li>Git &amp; GitHub</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

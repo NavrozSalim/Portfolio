@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="page">
-        <p class="hint screen-only">Scan the QR code to open the full CV / portfolio · Use Print for a cut-ready card</p>
+        <p class="hint screen-only">Scan the QR code to open the CV · Use Print for a cut-ready card</p>
 
         <div class="print-sheet">
             <p class="cut-note print-only">Cut along the dashed line · Standard ID size 86 × 54 mm</p>
@@ -41,13 +41,13 @@
                         </div>
 
                         <div class="id-card__qr-block">
-                            <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to portfolio CV"></div>
+                            <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to CV"></div>
                             <p class="id-card__qr-label">Scan for CV</p>
                         </div>
                     </div>
 
                     <footer class="id-card__footer">
-                        <span class="id-card__url">navrozsalim.github.io/Portfolio</span>
+                        <span class="id-card__url">navrozsalim.github.io/Portfolio/cv.html</span>
                         <span class="id-card__footer-links">
                             <a href="https://www.linkedin.com/in/navrozsalim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                             ·
@@ -66,7 +66,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
-        const cvUrl = "https://navrozsalim.github.io/Portfolio/";
+        const cvUrl = "https://navrozsalim.github.io/Portfolio/cv.html";
         new QRCode(document.getElementById("qrcode"), {
             text: cvUrl,
             width: 112,
