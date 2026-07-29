@@ -168,6 +168,15 @@ header p {
     transform: translateY(-3px);
 }
 
+.contact-btn.idcard {
+    background-color: #1a6b5c;
+}
+
+.contact-btn.idcard:hover {
+    background-color: #145246;
+    transform: translateY(-3px);
+}
+
 /* Footer Styles */
 footer {
     background-color: #333;
