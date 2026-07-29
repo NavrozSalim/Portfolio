@@ -133,41 +133,39 @@ header p {
     margin-bottom: 20px;
 }
 
-.contact form {
+.contact-links {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
-.contact form input,
-.contact form textarea {
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 1px solid #ccc;
+.contact-btn {
+    display: inline-block;
+    padding: 14px 22px;
     border-radius: 5px;
-    font-size: 1.1em;
-    transition: border 0.3s ease;
-}
-
-.contact form input:focus,
-.contact form textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.contact form button {
-    padding: 15px;
-    background-color: #28a745;
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.contact form button:hover {
-    background-color: #218838;
-    transform: translateY(-5px);
+.contact-btn.linkedin {
+    background-color: #0a66c2;
+}
+
+.contact-btn.linkedin:hover {
+    background-color: #004182;
+    transform: translateY(-3px);
+}
+
+.contact-btn.github {
+    background-color: #24292f;
+}
+
+.contact-btn.github:hover {
+    background-color: #000;
+    transform: translateY(-3px);
 }
 
 /* Footer Styles */
@@ -239,15 +237,11 @@ footer p:hover {
         font-size: 0.9em;
     }
 
-    .contact form input,
-    .contact form textarea {
-        padding: 10px;
+    .contact-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
         font-size: 1em;
-    }
-
-    .contact form button {
-        padding: 10px;
-        font-size: 1.1em;
     }
 
     footer {
