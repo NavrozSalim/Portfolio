@@ -13,8 +13,7 @@
     <div class="cv-toolbar screen-only">
         <a class="btn" href="Nauroz_Salim_CV.docx" download>Download DOCX</a>
         <button type="button" class="btn" onclick="window.print()">Print / Save PDF</button>
-        <a class="btn btn--ghost" href="index.html">Portfolio</a>
-        <a class="btn btn--ghost" href="id-card.html">ID Card</a>
+        <a class="btn btn--ghost" href="https://navrozsalim.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">Portfolio</a>
     </div>
 
     <main class="cv" aria-label="Curriculum Vitae of Nauroz Salim">
@@ -22,13 +21,13 @@
             <img class="cv__photo" src="image.jpg" alt="Portrait of Nauroz Salim">
             <div class="cv__identity">
                 <h1>Nauroz Salim</h1>
-                <p class="cv__title">Web Developer Intern · Computer Engineering Student</p>
+                <p class="cv__title">Computer Engineering Student · Full-Stack &amp; Automation Developer</p>
                 <p class="cv__contacts">
                     <a href="https://www.linkedin.com/in/navrozsalim">LinkedIn</a>
                     <span aria-hidden="true">·</span>
                     <a href="https://github.com/NavrozSalim">GitHub</a>
                     <span aria-hidden="true">·</span>
-                    <a href="https://navrozsalim.github.io/Portfolio/">Portfolio</a>
+                    <a class="cv__portfolio-link" href="https://navrozsalim.github.io/Portfolio/">Portfolio</a>
                 </p>
             </div>
         </header>
@@ -36,10 +35,83 @@
         <section class="cv__section">
             <h2>Profile</h2>
             <p>
-                Computer Engineering student and aspiring web developer specializing in responsive,
-                user-friendly web applications. Skilled in HTML, CSS, JavaScript, React, Node.js, and Python.
-                Builds job-ready projects around SaaS workflows, AI-assisted tools, and data dashboards, and is eager to contribute to professional development teams.
+                Computer Engineering student with hands-on experience building full-stack products,
+                marketplace automation systems, web scrapers, and SaaS-style sync tools.
+                Comfortable with JavaScript/TypeScript stacks, Python tooling, APIs, and shipping
+                practical solutions for e-commerce operations and AI-assisted workflows.
             </p>
+        </section>
+
+        <section class="cv__section">
+            <h2>Selected Work &amp; Projects</h2>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>LogAI — Final Year Project</h3>
+                    <span>AI · Backend · Frontend · Docker</span>
+                </div>
+                <p>
+                    Building an AI-assisted logging and operations platform with separate auth service,
+                    backend APIs, frontend app, datasets, demo shop integration, and Docker-based deployment.
+                </p>
+            </article>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Reverb Marketplace Platform &amp; Listing Automation</h3>
+                    <span>Full-Stack · Automation · APIs</span>
+                </div>
+                <p>
+                    Developed Reverb-focused website work (frontend/backend) and listing automation flows
+                    that prepare, format, and publish product data for marketplace selling at scale.
+                </p>
+            </article>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Multi-Marketplace Scrapers &amp; Listing Formatters</h3>
+                    <span>Python/JS · Scraping · Data Pipelines</span>
+                </div>
+                <p>
+                    Built scrapers and formatting tools across marketplaces such as Amazon, eBay, Temu,
+                    Target, Sears, Walmart, Kogan, Mydeal, HEB, Costco, and Etsy — including bulk listing
+                    formatters, description formatters, image tools, and validation utilities.
+                </p>
+            </article>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>WEsolucions — SaaS Store Sync</h3>
+                    <span>SaaS · Multi-channel Sync</span>
+                </div>
+                <p>
+                    Worked on SaaS store-sync systems that connect and synchronize store/channel data
+                    for multi-marketplace operations, helping keep product and listing workflows consistent.
+                </p>
+            </article>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Sscomic Website &amp; Client Web Work</h3>
+                    <span>HTML/CSS/JS · Website Delivery</span>
+                </div>
+                <p>
+                    Delivered website and theme-related work for Sscomic, focusing on practical frontend
+                    implementation and client-ready presentation of products/services online.
+                </p>
+            </article>
+
+            <article class="cv__item">
+                <div class="cv__item-head">
+                    <h3>Apify Actors &amp; Channel Workflow Tools</h3>
+                    <span>Automation · Actors · Workflows</span>
+                </div>
+                <p>
+                    Created Apify actors and channel/workflow tooling (including Channelpilot-style
+                    workflow support and YouTube automation experiments) to automate repetitive
+                    data-collection and publishing tasks.
+                </p>
+            </article>
         </section>
 
         <section class="cv__section">
@@ -69,53 +141,15 @@
         </section>
 
         <section class="cv__section">
-            <h2>Projects</h2>
-            <article class="cv__item">
-                <div class="cv__item-head">
-                    <h3>Job Application Tracker</h3>
-                    <span>JavaScript · LocalStorage · CRUD</span>
-                </div>
-                <p>Tracks internship and junior job applications through a status pipeline (Applied, Interview, Offer, Rejected), with KPI summaries and saved progress in the browser.</p>
-            </article>
-            <article class="cv__item">
-                <div class="cv__item-head">
-                    <h3>AI Resume Feedback Tool</h3>
-                    <span>JavaScript · ATS Keyword Analysis</span>
-                </div>
-                <p>Analyzes pasted resume text against a target role, scores keyword match strength, and suggests concrete improvements for ATS-friendly applications.</p>
-            </article>
-            <article class="cv__item">
-                <div class="cv__item-head">
-                    <h3>E-Commerce Analytics Dashboard</h3>
-                    <span>JavaScript · Chart.js · REST API</span>
-                </div>
-                <p>Shows store performance with revenue trends, category charts, KPI cards, and a top-products table powered by live product API data.</p>
-            </article>
-            <article class="cv__item">
-                <div class="cv__item-head">
-                    <h3>E-Commerce Product Catalog</h3>
-                    <span>HTML · CSS · JavaScript · API</span>
-                </div>
-                <p>Displays products from an API with search and category filtering so users can browse items quickly in a responsive shopping-style layout.</p>
-            </article>
-            <article class="cv__item">
-                <div class="cv__item-head">
-                    <h3>Weather App</h3>
-                    <span>JavaScript · OpenWeather API</span>
-                </div>
-                <p>Fetches and displays real-time weather for any city, including conditions and temperature, with a clean responsive interface.</p>
-            </article>
-        </section>
-
-        <section class="cv__section">
             <h2>Skills</h2>
             <ul class="cv__skills">
                 <li>HTML, CSS, JavaScript</li>
                 <li>React, Node.js</li>
                 <li>Python</li>
                 <li>REST APIs &amp; JSON</li>
-                <li>Dashboards &amp; Chart.js</li>
-                <li>Responsive Web Design</li>
+                <li>Web Scraping &amp; Automation</li>
+                <li>Marketplace Integrations</li>
+                <li>Docker &amp; Deployment basics</li>
                 <li>Git &amp; GitHub</li>
             </ul>
         </section>

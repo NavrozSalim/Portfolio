@@ -107,6 +107,13 @@ body {
     text-decoration: none;
 }
 
+.cv__portfolio-link {
+    color: var(--accent) !important;
+    font-weight: 700;
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+}
+
 .cv__contacts a:hover {
     text-decoration: underline;
 }
