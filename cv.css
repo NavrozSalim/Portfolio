@@ -12,8 +12,8 @@
 
 body {
     margin: 0;
-    font-family: "DM Sans", sans-serif;
-    color: var(--ink);
+    font-family: "DM Sans", "Segoe UI", Tahoma, sans-serif;
+    color: #1a1a1a;
     background: var(--paper);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -64,20 +64,21 @@ body {
 
 .cv__role {
     margin: 0 0 0.45rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
 }
 
 .cv__name {
     margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
+    font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
     font-size: 2.05rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     line-height: 1.15;
+    color: #1a1a1a;
 }
 
 .cv__contacts {
