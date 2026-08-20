@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="page">
-        <p class="hint screen-only">Scan the QR code to open the CV · Use Print for a cut-ready card</p>
+        <p class="hint screen-only">Scan the QR code to open Nauroz_Salim_CV.docx · Use Print for a cut-ready card</p>
 
         <div class="print-sheet">
             <p class="cut-note print-only">Cut along the dashed line · Standard ID size 86 × 54 mm</p>
@@ -32,7 +32,7 @@
 
                         <div class="id-card__info">
                             <h1 class="id-card__name">Nauroz Salim</h1>
-                            <p class="id-card__role">Web Developer Intern</p>
+                            <p class="id-card__role">Full-Stack &amp; Automation Developer</p>
                             <ul class="id-card__meta">
                                 <li>Bachelors in Computer Engineering</li>
                                 <li>Sir Syed University of Engineering &amp; Technology</li>
@@ -41,13 +41,13 @@
                         </div>
 
                         <div class="id-card__qr-block">
-                            <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to CV"></div>
+                            <div id="qrcode" class="id-card__qr" role="img" aria-label="QR code linking to Nauroz_Salim_CV.docx"></div>
                             <p class="id-card__qr-label">Scan for CV</p>
                         </div>
                     </div>
 
                     <footer class="id-card__footer">
-                        <span class="id-card__url">navrozsalim.github.io/Portfolio/cv.html</span>
+                        <span class="id-card__url">navrozsalim.github.io/Portfolio/Nauroz_Salim_CV.docx</span>
                         <span class="id-card__footer-links">
                             <a href="https://www.linkedin.com/in/navrozsalim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                             ·
@@ -60,13 +60,14 @@
 
         <div class="actions screen-only">
             <button type="button" class="btn" onclick="window.print()">Print ID Card</button>
+            <a class="btn" href="Nauroz_Salim_ID_Card.docx" download>Download ID Card (DOCX)</a>
             <a class="btn btn--ghost" href="cv.html">Back to CV</a>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
-        const cvUrl = "https://navrozsalim.github.io/Portfolio/cv.html";
+        const cvUrl = "https://navrozsalim.github.io/Portfolio/Nauroz_Salim_CV.docx";
         new QRCode(document.getElementById("qrcode"), {
             text: cvUrl,
             width: 112,
