@@ -1,6 +1,6 @@
 :root {
     --ink: #1a1a1a;
-    --muted: #4a4a4a;
+    --muted: #444444;
     --line: #cfcfcf;
     --paper: #eceae6;
     --sheet: #ffffff;
@@ -49,22 +49,25 @@ body {
 
 .cv {
     width: min(900px, calc(100% - 2rem));
+    min-height: 1120px;
     margin: 0.6rem auto 1.4rem;
     background: var(--sheet);
-    padding: 1.6rem 1.75rem 1.5rem;
+    padding: 2rem 2rem 2.1rem;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
 }
 
 .cv__header {
     text-align: center;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 0.85rem;
-    margin-bottom: 0.85rem;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.15rem;
 }
 
 .cv__role {
-    margin: 0 0 0.45rem;
-    font-size: 0.78rem;
+    margin: 0 0 0.55rem;
+    font-size: 0.86rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -74,21 +77,21 @@ body {
 .cv__name {
     margin: 0;
     font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
-    font-size: 2.05rem;
+    font-size: 2.35rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    line-height: 1.15;
+    letter-spacing: 0.045em;
+    line-height: 1.12;
     color: #1a1a1a;
 }
 
 .cv__contacts {
-    margin: 0.55rem 0 0;
-    font-size: 0.82rem;
+    margin: 0.7rem 0 0;
+    font-size: 0.92rem;
     color: var(--muted);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.25rem 0.45rem;
+    gap: 0.3rem 0.5rem;
 }
 
 .cv__contacts a,
@@ -114,7 +117,7 @@ body {
 }
 
 .cv__section {
-    margin-bottom: 0.85rem;
+    margin-bottom: 1.15rem;
 }
 
 .cv__section--last {
@@ -122,33 +125,44 @@ body {
 }
 
 .cv__section h2 {
-    margin: 0 0 0.45rem;
-    font-size: 0.72rem;
+    margin: 0 0 0.65rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink);
     border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.28rem;
 }
 
 .cv__section > p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.45;
+    font-size: 0.98rem;
+    line-height: 1.55;
 }
 
 .cv__columns {
     display: grid;
     grid-template-columns: 1.55fr 0.9fr;
-    gap: 1.35rem;
-    align-items: start;
+    gap: 1.6rem;
+    align-items: stretch;
+    flex: 1;
+}
+
+.cv__main,
+.cv__side {
+    display: flex;
+    flex-direction: column;
+}
+
+.cv__main .cv__section {
+    flex: 1;
 }
 
 .cv__job,
 .cv__edu {
-    margin-bottom: 0.7rem;
+    margin-bottom: 1.05rem;
 }
 
 .cv__job:last-child,
@@ -160,27 +174,27 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0.2rem 0.6rem;
+    gap: 0.25rem 0.7rem;
     align-items: baseline;
 }
 
 .cv__job-top h3,
 .cv__edu h3 {
     margin: 0;
-    font-size: 0.92rem;
+    font-size: 1.02rem;
     font-weight: 700;
 }
 
 .cv__dates {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     color: var(--muted);
     font-weight: 500;
 }
 
 .cv__job-role {
-    margin: 0.12rem 0 0.25rem;
-    font-size: 0.78rem;
+    margin: 0.2rem 0 0.4rem;
+    font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -188,21 +202,21 @@ body {
 }
 
 .cv__note {
-    margin: 0.1rem 0 0;
-    font-size: 0.78rem;
+    margin: 0.15rem 0 0;
+    font-size: 0.84rem;
     color: var(--muted);
 }
 
 .cv__job ul {
     margin: 0;
-    padding-left: 1.05rem;
+    padding-left: 1.15rem;
 }
 
 .cv__job li {
-    margin-bottom: 0.12rem;
-    font-size: 0.82rem;
+    margin-bottom: 0.28rem;
+    font-size: 0.92rem;
     color: var(--muted);
-    line-height: 1.35;
+    line-height: 1.42;
 }
 
 .cv__skills {
@@ -212,31 +226,40 @@ body {
 }
 
 .cv__skills li {
-    font-size: 0.84rem;
+    font-size: 0.92rem;
     color: var(--muted);
-    padding: 0.18rem 0;
+    padding: 0.32rem 0;
     border-bottom: 1px solid #eee;
+    line-height: 1.35;
 }
 
 .cv__skills li:last-child {
     border-bottom: none;
 }
 
+.cv__edu {
+    margin-bottom: 0.95rem;
+}
+
 @media (max-width: 720px) {
+    .cv {
+        min-height: 0;
+    }
+
     .cv__columns {
         grid-template-columns: 1fr;
-        gap: 0.85rem;
+        gap: 1rem;
     }
 
     .cv__name {
-        font-size: 1.65rem;
+        font-size: 1.8rem;
     }
 }
 
 @media print {
     @page {
         size: A4;
-        margin: 10mm 12mm;
+        margin: 9mm 11mm;
     }
 
     body {
@@ -249,57 +272,82 @@ body {
 
     .cv {
         width: 100%;
+        min-height: 277mm;
         margin: 0;
         padding: 0;
         box-shadow: none;
     }
 
+    .cv__header {
+        padding-bottom: 0.85rem;
+        margin-bottom: 0.9rem;
+    }
+
     .cv__name {
-        font-size: 20pt;
+        font-size: 22pt;
     }
 
     .cv__role {
-        font-size: 7.5pt;
-        letter-spacing: 0.22em;
+        font-size: 9pt;
+        letter-spacing: 0.16em;
     }
 
     .cv__contacts {
-        font-size: 8.5pt;
+        font-size: 9.5pt;
+        margin-top: 0.55rem;
     }
 
     .cv__section {
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.85rem;
     }
 
     .cv__section h2 {
-        font-size: 8pt;
+        font-size: 9pt;
+        margin-bottom: 0.45rem;
+        padding-bottom: 0.2rem;
     }
 
-    .cv__section > p,
+    .cv__section > p {
+        font-size: 10pt;
+        line-height: 1.45;
+    }
+
     .cv__job li,
     .cv__skills li {
-        font-size: 8.5pt;
-        line-height: 1.3;
+        font-size: 9.5pt;
+        line-height: 1.38;
+    }
+
+    .cv__job li {
+        margin-bottom: 0.2rem;
     }
 
     .cv__job-top h3,
     .cv__edu h3 {
-        font-size: 9.5pt;
+        font-size: 10.5pt;
     }
 
     .cv__job-role,
     .cv__dates,
     .cv__note {
-        font-size: 7.5pt;
+        font-size: 8.5pt;
     }
 
     .cv__columns {
-        gap: 0.9rem;
+        gap: 1.15rem;
     }
 
     .cv__job {
-        margin-bottom: 0.45rem;
+        margin-bottom: 0.75rem;
         break-inside: avoid;
+    }
+
+    .cv__edu {
+        margin-bottom: 0.7rem;
+    }
+
+    .cv__skills li {
+        padding: 0.28rem 0;
     }
 
     a {
