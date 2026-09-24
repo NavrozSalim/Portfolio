@@ -157,15 +157,12 @@ body {
     height: 100%;
 }
 
-.cv__main .cv__section:last-child,
-.cv__side .cv__section:last-child {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.cv__side {
+    justify-content: space-between;
 }
 
-.cv__side .cv__section:last-child ul {
-    margin-top: auto;
+.cv__side .cv__section {
+    margin-bottom: 0;
 }
 
 .cv__job,
@@ -236,7 +233,7 @@ body {
 .cv__skills li {
     font-size: 0.92rem;
     color: var(--muted);
-    padding: 0.32rem 0;
+    padding: 0.42rem 0;
     border-bottom: 1px solid #eee;
     line-height: 1.35;
 }
